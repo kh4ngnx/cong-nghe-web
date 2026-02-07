@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomePage } from './pages/home-page/home-page';
 import { DetailPage } from './pages/detail-page/detail-page';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -11,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'detail/:id',
     component: DetailPage,
-    canActivate: [],
+    canActivate: [adminGuard],
     children: [],
   },
 ];

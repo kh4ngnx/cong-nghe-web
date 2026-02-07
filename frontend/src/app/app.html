@@ -1,4 +1,36 @@
-<a routerLink="">HomePage</a>
-<a routerLink="detail/1">Detail page</a>
+@let products = products$ | async;
+
+@if (!products) {
+  <div>Loading...</div>
+} @else {
+  <p-table [value]="products">
+    <ng-template #header>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-product>
+      <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.title }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+}
+
+@if (products && products.length > 0) {
+  @for (product of products; track product.id) {
+    <div>
+      {{ product | customPipe }}
+    </div>
+  }
+} @else {
+  <div>Loading...</div>
+}
+
+<div>{{ name }} - {{ name | uppercase }}</div>
+
+<p-button label="Check" />
 
 <router-outlet />
